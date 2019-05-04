@@ -20,11 +20,11 @@ import React from 'react';
           super(props);
       }
       render() {
-        const {name, isTeacher} = this.props;
+        const {name, isTeacher, count} = this.props;
         if (isTeacher) {
-            return (<h2>Hello, {name}, I am a Teacher!</h2>);
+            return (<h2>Hello, {name}, I am a Teacher! {this.props.count}</h2>);
         } else {
-            return (<p>Hello, {name}, I am a student!</p>);
+            return (<p>Hello, {name}, I am a student! {this.props.count}</p>);
         }
       }
   };
