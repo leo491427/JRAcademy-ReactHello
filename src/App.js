@@ -10,7 +10,7 @@ const App = () => {
         <Welcome name={'Nick'} isTeacher />
         <Welcome name="Tim" />
         <Welcome name="Leo"></Welcome>
-        <Counter />
+        <Counter diff={3}/>
     </section>
   );
 }

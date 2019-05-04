@@ -4,9 +4,23 @@ class Counter extends React.Component {
     constructor(props) {
         super(props);
         this.state = {counter: 0};
+        console.log('constructor');
+    }
+
+    componentDidMount() {
+        console.log('componentDidMount');
+    }
+
+    componentDidUpdate() {
+        console.log(`componentDidUpdate + ${this.state.counter}`);
+    }
+
+    componentWillUnmount() {
+        console.log(`componentWillUnmount`);
     }
 
     render() {
+        console.log('render');
         return (
             <div>
                 <span>This is a counter: {this.state.counter}  </span>
@@ -17,12 +31,19 @@ class Counter extends React.Component {
     }
 
     handleSubtract = () => {
-        this.setState({counter: this.state.counter - 1});
+        // Wrong: setState is async
+        //this.setState({counter: this.state.counter - 1});
+        this.setState((preState) => ({counter: preState.counter - 1})); //不用return的简单写法，因为返回一个对象{}，所以需要一个（）避免系统歧义
+        //this.setState({counter:this.preState.counter -1});  报错
     };
 
     handleAdd = () => {
-        this.setState({counter: this.state.counter + 1});
-    }
+        // Wrong: setState is asyn
+        //this.setState({counter: this.state.counter + 1});
+        this.setState((preState, props) => {
+            return {counter: preState.counter + props.diff};
+        });
+    };
 };
 
 export default Counter;
