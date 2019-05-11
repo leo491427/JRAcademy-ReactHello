@@ -6,6 +6,7 @@ const defaultState = {
 };
 
 const counter = (state = defaultState, action) => {
+    console.log('counterReducer');
     switch(action.type) {
         case INCREMENT:
             // {count: 1, diff: 1}

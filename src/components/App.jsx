@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import './App.css';
 import Welcome from './Welcome';
 import Counter from './Counter';
+import WelcomeForm from './WelcomeForm'
+import { getWelcomeAsync } from '../actions/welcomeAction';
 
 // const welcomeList = [
 //   {id:1, name: 'Nick', isTeacher:true },
@@ -15,6 +17,10 @@ class App extends React.Component {
     super(props);
   }
 
+  componentDidMount() {
+    this.props.dispatch(getWelcomeAsync());
+  }
+
   render() {
     const {count, diff, dispatch} = this.props;
     return (
@@ -23,11 +29,13 @@ class App extends React.Component {
           this.props.welcomeList.map((element, index) => 
           (
             <div key={index}>
-              <Welcome name={element.name} isTeacher={element.isTeacher} count={count}/>
+              {console.log(element)}
+              <Welcome author={element.author} content={element.content}/>
             </div>)
           )
         }
-          <Counter count={count} diff={diff} dispatch={dispatch}/>  
+          <Counter count={count} diff={diff} dispatch={dispatch}/>
+          <WelcomeForm dispatch={dispatch}></WelcomeForm>  
       </section>
     );
   }
